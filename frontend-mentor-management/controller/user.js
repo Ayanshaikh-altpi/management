@@ -3,6 +3,9 @@ const connect = require("../config/db");
 const signup = async (req, res) => {
   try {
     const { fname, lname, adhar, email, password, image, role } = req.body;
+    if(!fname || !lname ||!adhar || !email || !password || !image || !role){
+      return res.status(400).json({message:"Please Enter The Detail"})
+    }
     const data = await connect.query(
       "INSERT INTO users (fname,lname,adhar,email,password,image,role) VALUES (?,?,?,?,?,?,?)",
       [fname, lname, adhar, email, password, image, role]
@@ -10,6 +13,7 @@ const signup = async (req, res) => {
     if (data[0].affectedRows < 1) {
       return res.status(400).json({ message: "Something went wrong!" });
     }
+    
     res.status(201).json({ message: "User created success" });
   } catch (err) {
     res.status(500).json({ message: err });
@@ -20,7 +24,7 @@ const signin = async (req, res) => {
   try {
     const { email, password } = req.body;
     const [[user]] = await connect.query(
-      "SELECT * FROM users WHERE email = ? AND password=?",
+      "SELECT * FROM users WHERE email = ?",
       [email]
     );
     if (user.password !== password) {

@@ -22,7 +22,7 @@ const submitData = async (e) => {
     });
     const res = await response.json();
     console.log(res);
-    location.href = `/dashboard.html`
+    location.href = `/frontend-mentor-management-client/dashboard.html`
   } catch (error) {
     console.error("An error occurred:", error);
   }

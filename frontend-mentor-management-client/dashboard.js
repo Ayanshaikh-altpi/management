@@ -15,13 +15,20 @@ window.onload = async () => {
             : task.completed
             ? "Completed"
             : task.rejected
-            ? "Rejected"
+            ? "Accept"
             :"Pending"
+
       
         }</td>
       </tr>
     `;
+     
   });
 
   document.querySelector("tbody").insertAdjacentHTML("afterend", html);
 };
+const btnDash=document.querySelector(".btn-dash")
+
+btnDash.addEventListener('click',function(){
+  location.href='/frontend-mentor-management-client/dashboardUser.html'
+})

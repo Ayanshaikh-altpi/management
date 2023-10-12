@@ -16,7 +16,7 @@
       <form class="p-5" id="signup">
         <!-- <img class="mb-4 " src="" alt="" width="72" height="57"> -->
         <h1 class="h3 mb-3 fw-normal text-center fw-bold">Please Sign Up</h1>
-
+      <p class="text-danger msg"></p>
         <div class="form-floating">
           <input type="text" class="form-control fname" id="floatingInput" />
           <label for="floatingInput">First Name</label>
@@ -45,8 +45,8 @@
           <input
             type="file"
             class="form-control image"
-            accept="image/jpeg,image/jpg,image/png"
             id="input-file"
+            onchange="convertBase64(event)"
           />
         </div>
         <div class="dropdown">

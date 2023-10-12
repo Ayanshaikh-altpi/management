@@ -6,7 +6,23 @@ const password = document.querySelector(".password");
 const image = document.querySelector(".image");
 const role = document.querySelector("#dropdown1");
 const signupBtn = document.querySelector("#signup");
-console.log(signupBtn);
+const msg = document.querySelector('.msg');
+
+let imageAsBase64 = ''
+
+const convertBase64 = (e) => {
+  console.log(e.target.files[0]);
+  const reader = new FileReader()
+  reader.readAsDataURL(e.target.files[0])
+  reader.onload = () => {
+    imageAsBase64 = reader.result
+    console.log(reader.result);
+    console.log(imageAsBase64);
+  }
+  reader.onerror = () => {
+    console.log('Something went wrong!');
+  }
+}
 
 const submitBtn = async (e) => {
   e.preventDefault();
@@ -17,7 +33,7 @@ const submitBtn = async (e) => {
     adhar: adhar.value,
     email: email.value,
     password: password.value,
-    image: image.value,
+    image: imageAsBase64,
     role: role.value,
   };
   console.log(data);
@@ -31,13 +47,17 @@ const submitBtn = async (e) => {
     });
 
     const res = await response.json();
+
     if (res.ok) {
-      window.location.href = "/dashboard.html";
+      window.location.href = "/frontend-mentor-management-client/signIn.html";
     }
     console.log(res);
+    msg.textContent = res.message
   } catch (error) {
     console.error("An error occurred:", error);
   }
 };
 
+
 signupBtn.addEventListener("submit", submitBtn);
+

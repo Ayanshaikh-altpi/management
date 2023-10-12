@@ -9,9 +9,8 @@ window.onload = async () => {
                 <td>${user.fname}</td>
                 <td>${user.lname}</td>
                 <td>
-                    <button class="btn btn-primary btn-task" data-id="${
-                      user.idusers
-                    }">Assign</button>
+                    <button class="btn btn-primary btn-task" data-id="${user.idusers
+      }">Assign</button>
                 </td>
             </tr>
         `;
@@ -24,7 +23,15 @@ window.onload = async () => {
     btn.addEventListener("click", function () {
       const userId = btn.getAttribute("data-id");
       console.log(userId);
-      location.href = `/assignTask.html?id=${userId}`;
+      location.href = `/frontend-mentor-management-client/assignTask.html?id=${userId}`;
     });
   });
 };
+
+const statusBtn = document.querySelector('.btn-status')
+
+statusBtn.addEventListener('click', function () {
+  location.href = '/frontend-mentor-management-client/dashboard.html'
+  // history.back()
+  
+})

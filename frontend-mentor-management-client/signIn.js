@@ -8,7 +8,8 @@ const submitBtn = async (e) => {
   const data = {
     email: email.value,
     password: password.value,
-  };
+  };  
+  
   try {
     const response = await fetch("http://localhost:4000/signin", {
       method: "POST",
@@ -19,8 +20,11 @@ const submitBtn = async (e) => {
     });
 
     const res = await response.json();
-    window.location.href = "/dashboard.html";
-    console.log(res);
+    if (res.user.role.toLowerCase() === 'manager') {
+      window.location.href = "/frontend-mentor-management-client/dashboardUser.html";
+    } else {
+      window.location.href = `/frontend-mentor-management-client/userDashboard.html?id=${res.user.idusers}`;
+    }
   } catch (error) {
     console.error("An error occurred:", error);
   }
