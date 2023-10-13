@@ -4,20 +4,18 @@ const nav = document.querySelector('.nav')
 const image = document.querySelector('img')
 
 const labelImage = document.querySelector('.avatar')
-console.log(image);
+console.log(labelImage);
 
 window.onload = async () => {
   const id = location.href.split("?")[1].split("=")[1];
+  console.log(id);
   const res = await fetch(`http://localhost:4000/user-tasks?id=${id}`);
-  const { tasks } = await res.json();
-  console.log(tasks);
+  const tasks = await res.json();
+  labelImage.setAttribute('src', 'data:image/jpeg;base64,' + tasks.tasks[0].image.split(',')[1]) 
 
-
-  const html = tasks.map((task, index) => {
+  const html = tasks.tasks.map((task, index) => {
     nameUser.textContent = task.lname;
-    console.log(Buffer.from(tasks[0].image, "utf8"));
-    labelImage.setAttribute('src', 'data:image/png;base64,' + task[0].image)
-
+   
     return `
                 <tr>
                 <td>${index + 1}</td>

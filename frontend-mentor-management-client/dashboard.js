@@ -2,7 +2,7 @@
 window.onload = async () => {
   const res = await fetch("http://localhost:4000/tasks");
   const data = await res.json();
-  console.log(data);
+  console.log("this is data",data);
   const html = data.tasks.map((task) => {
     return `
       <tr>

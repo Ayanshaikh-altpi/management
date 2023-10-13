@@ -3,12 +3,13 @@ const lname = document.querySelector(".lname");
 const adhar = document.querySelector(".adhar");
 const email = document.querySelector(".email");
 const password = document.querySelector(".password");
-const image = document.querySelector(".image");
+const image = document.querySelector("#input-file");
 const role = document.querySelector("#dropdown1");
 const signupBtn = document.querySelector("#signup");
 const msg = document.querySelector('.msg');
 
 let imageAsBase64 = ''
+console.log(image['files'][0])
 
 const convertBase64 = (e) => {
   console.log(e.target.files[0]);
@@ -19,14 +20,19 @@ const convertBase64 = (e) => {
     console.log(reader.result);
     console.log(imageAsBase64);
   }
+
   reader.onerror = () => {
     console.log('Something went wrong!');
   }
 }
 
+
+
+
+
+
 const submitBtn = async (e) => {
   e.preventDefault();
-
   const data = {
     fname: fname.value,
     lname: lname.value,
