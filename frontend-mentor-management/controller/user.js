@@ -52,7 +52,9 @@ const getUserTask = async (req, res) => {
     // const [userTask] = await connect.query("SELECT * FROM tasks WHERE idtasks = ?", [req.query.id]);
     const [userTask] = await connect.query("SELECT * FROM tasks JOIN users ON tasks.idusers = users.idusers WHERE users.idusers = ?", [req.query.id]);
     const [ image] = await connect.query('SELECT image FROM users WHERE idusers = ?', [req.params.id])
-    const [comment]=await connect.query('INSERT INTO tasks (note) VALUES (?)',[req.body])
+    // const [comment]=await connect.query('INSERT INTO tasks (note) VALUES (?)',[req.body])
+    
+    console.log(image);
 
     if (!userTask) {
       return res.status(400).json({ message: "Not found!" });

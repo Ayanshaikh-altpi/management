@@ -21,7 +21,6 @@ window.onload = async () => {
                 <td>${index + 1}</td>
                 <td>${task.fname}</td>
                 <td>${task.task}</td>
-                <td><input type="text" placeholder="Write Comment Here "></td>
                 <td>
                 <button class="btn btn-primary btn-complete" data-user='${JSON.stringify(
       task
