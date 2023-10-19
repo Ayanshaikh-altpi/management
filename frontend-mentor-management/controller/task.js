@@ -36,8 +36,8 @@ const increaseTaskDate = async (req, res) => {
     await connect.query(
       "UPDATE tasks SET dueDate = ? WHERE idusers = ? AND idtasks = ?",
       [req.params.id, req.body.id]
-      );
-      
+    );
+
     if (!req.params.id || !req.body.id) {
       return res.status(400).json({ message: "Not Found" });
     }
@@ -62,13 +62,7 @@ const sendNotification = async (req, res) => {
 const completeTask = async (req, res) => {
   try {
     const { userId, taskId } = req.body;
-    // const [[task]] = await connect.query(
-    //   "SELECT * FROM tasks WHERE idtasks = ?",
-    //   [taskId]
-    // );
-    // if (task.rejected !== null) {
-    //   return res.status(200).json({ message: "Task Already Accepted" });
-    // }
+
     await connect.query(
       "UPDATE tasks SET completed = ? WHERE idusers = ? AND idtasks = ?",
       [true, userId, taskId]
@@ -85,13 +79,7 @@ const completeTask = async (req, res) => {
 const rejectTask = async (req, res) => {
   try {
     const { userId, taskId } = req.body;
-    // const [[task]] = await connect.query(
-    //   "SELECT * FROM tasks WHERE idtasks = ?",
-    //   [taskId]
-    // );
-    // if (task.completed !== null) {
-    //   return res.status(400).json({ message: "Task already completed" });
-    // }
+
     await connect.query(
       "UPDATE tasks SET rejected = ? WHERE idusers = ? AND idtasks = ?",
       [true, userId, taskId]
@@ -104,6 +92,29 @@ const rejectTask = async (req, res) => {
     res.status(500).json({ message: err });
   }
 };
+const updateTask = async (req, res) => {
+  const idtasks = req.params.id;
+  console.log(idtasks);
+  const { task, assignDate, dueDate } = req.body;
+
+  const sql = "UPDATE tasks SET task=?, assignDate=?, dueDate=? WHERE idtasks=?";
+  const values = [task, assignDate, dueDate, idtasks];
+
+  connect.query(sql, values, (err, result) => {
+    if (err) {
+      console.error("Error Updating Assigned Task", err);
+      return res.status(500).json({ error: "Error Updating Assigned Task" });
+    }
+    console.log('2');
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: 'Task not found' });
+    }
+    console.log('3');
+    res.status(200).json({ message: 'Task updated successfully' });
+  });
+};
+
+
 
 module.exports = {
   getAllTask,
@@ -112,4 +123,5 @@ module.exports = {
   sendNotification,
   completeTask,
   rejectTask,
+  updateTask
 };
