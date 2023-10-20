@@ -1,19 +1,24 @@
+const nameRole=document.querySelector(".name")
+
 window.onload = async () => {
+  const userData = JSON.parse(localStorage.getItem('user'));
+  nameRole.textContent=userData.fname
+
   const res = await fetch("http://localhost:4000/info");
   const { users } = await res.json();
   console.log(users);
   const html = users.map((user, index) => {
     return `
-            <tr>
-                <td>${index + 1}</td>
-                <td>${user.fname}</td>
-                <td>${user.lname}</td>
-                <td>
-                    <button class="btn btn-primary btn-task" data-id="${user.idusers
-      }">Assign</button>
-                </td>
-            </tr>
-        `;
+    <tr>
+    <td>${index + 1}</td>
+    <td>${user.fname}</td>
+    <td>${user.lname}</td>
+    <td>
+    <button class="btn btn-primary btn-task" data-id="${user.idusers
+    }">Assign</button>
+    </td>
+    </tr>
+    `;
   });
   document.querySelector("tbody").insertAdjacentHTML("afterend", html);
 

@@ -20,9 +20,12 @@ const submitBtn = async (e) => {
     });
 
     const res = await response.json();
+    
     if (res.user.role.toLowerCase() === 'manager') {
       window.location.href = "/frontend-mentor-management-client/dashboardUser.html";
-    } else {
+      localStorage.setItem('user', JSON.stringify(res.user));
+      
+    } else {    
       window.location.href = `/frontend-mentor-management-client/userDashboard.html?id=${res.user.idusers}`;
     }
   } catch (error) {

@@ -92,26 +92,16 @@ const rejectTask = async (req, res) => {
     res.status(500).json({ message: err });
   }
 };
+
 const updateTask = async (req, res) => {
   const idtasks = req.params.id;
-  console.log(idtasks);
   const { task, assignDate, dueDate } = req.body;
-
-  const sql = "UPDATE tasks SET task=?, assignDate=?, dueDate=? WHERE idtasks=?";
-  const values = [task, assignDate, dueDate, idtasks];
-
-  connect.query(sql, values, (err, result) => {
-    if (err) {
-      console.error("Error Updating Assigned Task", err);
-      return res.status(500).json({ error: "Error Updating Assigned Task" });
-    }
-    console.log('2');
-    if (result.affectedRows === 0) {
-      return res.status(404).json({ message: 'Task not found' });
-    }
-    console.log('3');
-    res.status(200).json({ message: 'Task updated successfully' });
-  });
+if(!task || !assignDate || !dueDate){
+  return res.status(404).json({message:"Task cannot be updated"})
+}
+  const response = await connect.query("UPDATE tasks SET task=?, assignDate=?, dueDate=? WHERE idtasks=?", [task, assignDate, dueDate, idtasks])
+  console.log(response);
+  res.status(200).json({ message: 'Task Updated successfully' })
 };
 
 

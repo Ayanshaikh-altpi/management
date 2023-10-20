@@ -28,6 +28,7 @@ window.onload = async () => {
                   <button class="btn btn-secondary btn-reject" data-user='${JSON.stringify(task)
       }'>Accept</button>
                   </td>
+                  <td><i class="fa-regular fa-pen-to-square"></i></td>
                   <td>${task.dueDate}</td>
                 </tr>
             `;
