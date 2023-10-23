@@ -8,7 +8,6 @@ console.log(labelImage);
 
 window.onload = async () => {
   const id = location.href.split("?")[1].split("=")[1];
-  console.log(id);
   const res = await fetch(`http://localhost:4000/user-tasks?id=${id}`);
   const tasks = await res.json();
   labelImage.setAttribute('src', 'data:image/jpeg;base64,' + tasks.tasks[0].image.split(',')[1]) 
@@ -28,7 +27,6 @@ window.onload = async () => {
                   <button class="btn btn-secondary btn-reject" data-user='${JSON.stringify(task)
       }'>Accept</button>
                   </td>
-                  <td><i class="fa-regular fa-pen-to-square"></i></td>
                   <td>${task.dueDate}</td>
                 </tr>
             `;
@@ -73,4 +71,8 @@ window.onload = async () => {
 
     });
   });
+
+  
+
 };
+

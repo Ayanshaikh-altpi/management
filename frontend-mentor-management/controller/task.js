@@ -96,8 +96,8 @@ const rejectTask = async (req, res) => {
 const updateTask = async (req, res) => {
   const idtasks = req.params.id;
   const { task, assignDate, dueDate } = req.body;
-if(!task || !assignDate || !dueDate){
-  return res.status(404).json({message:"Task cannot be updated"})
+if(!task && !assignDate && !dueDate){
+  return res.json({message:"Task cannot be updated"})
 }
   const response = await connect.query("UPDATE tasks SET task=?, assignDate=?, dueDate=? WHERE idtasks=?", [task, assignDate, dueDate, idtasks])
   console.log(response);
