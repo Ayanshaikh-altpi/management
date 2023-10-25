@@ -14,12 +14,13 @@ window.onload = async () => {
 
   const html = tasks.tasks.map((task, index) => {
     nameUser.textContent = task.lname;
-   
+    console.log(task);
     return `
                 <tr>
                 <td>${index + 1}</td>
-                <td>${task.fname}</td>
+                <td>${task.managerMsg}</td>
                 <td>${task.task}</td>
+                <td><input type="text" class="comment" placeholder="Add Comment Here"/></td>
                 <td>
                 <button class="btn btn-primary btn-complete" data-user='${JSON.stringify(
       task
@@ -33,7 +34,10 @@ window.onload = async () => {
   });
   document.querySelector("tbody").insertAdjacentHTML("afterend", html);
 
+  const comment=document.querySelector('.comment')
+  comment.addEventListener('input',()=>{
 
+  })
   const completeBtn = document.querySelectorAll(".btn-complete");
   const rejectBtn = document.querySelectorAll(".btn-reject");
   completeBtn.forEach((btn) => {
@@ -47,8 +51,6 @@ window.onload = async () => {
       });
       const data = await res.json();
       console.log(data);
-
-      // location.href = `/frontend-mentor-management-client/dashboard.html`;
       msg.textContent = data.message
 
     });
@@ -72,7 +74,10 @@ window.onload = async () => {
     });
   });
 
-  
-
 };
+const logout=document.querySelector('.btn-danger')
+logout.addEventListener('click',()=>{
+  location.href=('http://127.0.0.1:5501/frontend-mentor-management-client/signIn.html')
+})
+
 

@@ -40,3 +40,7 @@ statusBtn.addEventListener('click', function () {
   // history.back()
   
 })
+const logout=document.querySelector('.btn-danger')
+logout.addEventListener('click',()=>{
+  location.href=('http://127.0.0.1:5501/frontend-mentor-management-client/signIn.html')
+})

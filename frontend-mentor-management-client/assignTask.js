@@ -2,11 +2,12 @@ const task = document.querySelector(".task");
 const assignDate = document.querySelector(".assignDate");
 const dueDate = document.querySelector(".dueDate");
 const submitBtn = document.querySelector(".submit");
-
+const managerMsg=document.querySelector(".mngMsg")
 const submitData = async (e) => {
   e.preventDefault();
   const data = {
     task: task.value,
+    managerMsg:managerMsg.value,
     assignDate: assignDate.value,
     dueDate: dueDate.value,
   };
@@ -29,3 +30,7 @@ const submitData = async (e) => {
 };
 
 submitBtn.addEventListener("click", submitData);
+const logout=document.querySelector('.btn-danger')
+logout.addEventListener('click',()=>{
+  location.href=('http://127.0.0.1:5501/frontend-mentor-management-client/signIn.html')
+})

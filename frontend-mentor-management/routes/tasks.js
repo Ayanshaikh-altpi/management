@@ -1,5 +1,6 @@
 const express = require("express");
 const {
+  employeeMsg,
   assignTask,
   increaseTaskDate,
   completeTask,
@@ -17,5 +18,6 @@ router.post("/notify/:id",sendNotification);
 router.put("/complete", completeTask);
 router.put("/reject", rejectTask);
 router.put('/update/:id',updateTask)
+router.post('/empMessage',employeeMsg)
 
 module.exports = router;

@@ -12,14 +12,14 @@ const getAllTask = async (req, res) => {
 };
 
 const assignTask = async (req, res) => {
-  const { task, assignDate, dueDate } = req.body;
+  const { task, managerMsg, assignDate, dueDate } = req.body;
   const userId = req.query.id;
 
   await connect.query(
-    "INSERT INTO tasks (task, assignDate, dueDate, idusers) VALUE (?, ?, ?, ?)",
-    [task, assignDate, dueDate, userId]
+    "INSERT INTO tasks (task, managerMsg, assignDate, dueDate, idusers) VALUE ( ?, ?, ?, ?, ? )",
+    [task, managerMsg, assignDate, dueDate, userId]
   );
-
+  
   if (!userId) {
     return res.status(404).json({ message: "No user found" });
   }
@@ -104,9 +104,18 @@ if(!task && !assignDate && !dueDate){
   res.status(200).json({ message: 'Task Updated successfully' })
 };
 
+const employeeMsg=async(req,res)=>{
+ const {employeeMsg}=req.body
+ await connect.query("INSERT INTO tasks (employeeMsg) VALUE (?)",[employeeMsg]);
+
+ if(!employeeMsg){
+  return res.json({message:"No Comment"})
+ }
+}
 
 
 module.exports = {
+  employeeMsg,
   getAllTask,
   assignTask,
   increaseTaskDate,
