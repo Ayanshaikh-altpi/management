@@ -9,12 +9,12 @@ window.onload = async () => {
   
     return `
       <tr ${task.idtasks}>
-        <td>${task.idtasks}</td>
+        <td>${index+1}</td>
+        <td>${task.fname}</td>
         <td id="taskContent">${task.task}</td>
-        <td><p>Emolyee message</p></td>
+        <td>${task.employeeMsg}</td>
         <td class="edit" id=${task.idtasks}'><i class="fa-regular fa-pen-to-square"></i></td>
         <td class="save-btn"><i class="fa-solid fa-check"></i></td>
-        <td>${task.fname}</td>
         <td>${
           !task.completed && !task.rejected
             ? "Pending"

@@ -19,7 +19,7 @@ const assignTask = async (req, res) => {
     "INSERT INTO tasks (task, managerMsg, assignDate, dueDate, idusers) VALUE ( ?, ?, ?, ?, ? )",
     [task, managerMsg, assignDate, dueDate, userId]
   );
-  
+
   if (!userId) {
     return res.status(404).json({ message: "No user found" });
   }
@@ -96,21 +96,22 @@ const rejectTask = async (req, res) => {
 const updateTask = async (req, res) => {
   const idtasks = req.params.id;
   const { task, assignDate, dueDate } = req.body;
-if(!task && !assignDate && !dueDate){
-  return res.json({message:"Task cannot be updated"})
-}
+  if (!task && !assignDate && !dueDate) {
+    return res.json({ message: "Task cannot be updated" })
+  }
   const response = await connect.query("UPDATE tasks SET task=?, assignDate=?, dueDate=? WHERE idtasks=?", [task, assignDate, dueDate, idtasks])
   console.log(response);
   res.status(200).json({ message: 'Task Updated successfully' })
 };
 
-const employeeMsg=async(req,res)=>{
- const {employeeMsg}=req.body
- await connect.query("INSERT INTO tasks (employeeMsg) VALUE (?)",[employeeMsg]);
+const employeeMsg = async (req, res) => {
+  const { employeeMsg } = req.body
+  await connect.query("UPDATE tasks SET employeeMsg = ? WHERE idtasks = ?", [employeeMsg, req.params.id]);
 
- if(!employeeMsg){
-  return res.json({message:"No Comment"})
- }
+  if (!employeeMsg) {
+    return res.json({ message: "No Comment" })
+  }
+  res.status(200).json({ message: 'Message send' })
 }
 
 

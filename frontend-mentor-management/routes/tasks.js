@@ -18,6 +18,6 @@ router.post("/notify/:id",sendNotification);
 router.put("/complete", completeTask);
 router.put("/reject", rejectTask);
 router.put('/update/:id',updateTask)
-router.post('/empMessage',employeeMsg)
+router.put('/empMessage/:id',employeeMsg)
 
 module.exports = router;

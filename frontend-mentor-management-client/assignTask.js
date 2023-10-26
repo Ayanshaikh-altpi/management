@@ -3,6 +3,12 @@ const assignDate = document.querySelector(".assignDate");
 const dueDate = document.querySelector(".dueDate");
 const submitBtn = document.querySelector(".submit");
 const managerMsg=document.querySelector(".mngMsg")
+
+const userData = JSON.parse(localStorage.getItem('user'));
+console.log(userData);
+const nameUser=document.querySelector('.name')
+nameUser.textContent=userData.fname
+
 const submitData = async (e) => {
   e.preventDefault();
   const data = {

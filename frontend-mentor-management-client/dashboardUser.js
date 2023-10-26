@@ -27,8 +27,8 @@ window.onload = async () => {
   assignBtn.forEach((btn) => {
     btn.addEventListener("click", function () {
       const userId = btn.getAttribute("data-id");
-      console.log(userId);
       location.href = `/frontend-mentor-management-client/assignTask.html?id=${userId}`;
+      
     });
   });
 };
@@ -37,8 +37,6 @@ const statusBtn = document.querySelector('.btn-status')
 
 statusBtn.addEventListener('click', function () {
   location.href = '/frontend-mentor-management-client/dashboard.html'
-  // history.back()
-  
 })
 const logout=document.querySelector('.btn-danger')
 logout.addEventListener('click',()=>{
